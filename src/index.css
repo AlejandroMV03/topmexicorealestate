@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@keyframes redGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.red-animated-border {
+  background: linear-gradient(270deg, #ff0000, #cc0000, #ff3300, #cc0000);
+  background-size: 600% 600%;
+  animation: redGradient 10s ease infinite;
+  border: 4px solid transparent;
+  border-image: linear-gradient(45deg, #ff0000, #cc0000, #ff3300, #cc0000) 1;
+  border-radius: 12px;
+  box-shadow:
+    0 0 15px 3px rgba(255, 0, 0, 0.7),
+    inset 0 0 10px 2px rgba(255, 50, 50, 0.8);
+  color: white; /* texto blanco */
+  /* para evitar scroll horizontal */
+  overflow-x: hidden;
+}
