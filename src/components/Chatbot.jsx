@@ -79,7 +79,7 @@ export default function Chatbot({ properties }) {
   async function procesarMensaje(userMessage) {
     const mensajeLower = userMessage.toLowerCase();
 
-    // Respuestas especiales para saludos sin llamar a Gemini
+    // Aqui es una respuesta rapida para cualquier saludo 
     const saludos = ["hola", "buenos días", "buenas tardes", "buenas noches", "buenas", "qué tal"];
     if (saludos.some((saludo) => mensajeLower.includes(saludo))) {
       setChatMensajes((prev) => [
@@ -92,7 +92,7 @@ export default function Chatbot({ properties }) {
       return;
     }
 
-    // Respuesta rápida para "qué día es hoy" o "fecha actual"
+    // Respuesta rapida para el dia 
     if (
       mensajeLower.includes("qué día es hoy") ||
       mensajeLower.includes("fecha") ||
@@ -115,7 +115,7 @@ export default function Chatbot({ properties }) {
       return;
     }
 
-    // Detectar preguntas matemáticas simples (ejemplo: "5 + 5", "cuánto es 5 por 3", etc.)
+    // Aqui detectamos si son preguntas matematicas
     const esPreguntaMatematica = /(\d+\s*[\+\-\*\/]\s*\d+)/.test(userMessage);
     if (esPreguntaMatematica) {
       const contexto = `Eres Top Mexico Real Estate, un asistente virtual experto en bienes raíces en México. Responde claramente.`;
@@ -143,7 +143,7 @@ export default function Chatbot({ properties }) {
       return;
     }
 
-    // Manejo modo confirmacion cita (tu lógica actual)
+    // Manejo modo confirmacion cita 
     if (modoConfirmacionCita) {
       if (
         mensajeLower.includes("agendar") ||
@@ -201,7 +201,7 @@ export default function Chatbot({ properties }) {
       return;
     }
 
-    // Detectar si el mensaje contiene datos sobre propiedades
+    // Aqui se detecta si los mensajes tienen datos relacionado a propiedades
     const tipoDetectado = detectarTipoEnMensaje(userMessage);
     const ciudadDetectada = detectarCiudadEnMensaje(userMessage);
     const regexPrecio = /\d+[ ]*m/gi;
@@ -213,7 +213,7 @@ export default function Chatbot({ properties }) {
       tipoDetectado || ciudadDetectada || preciosNumeros.length >= 2 || numeroPedido;
 
     if (contieneDatosPropiedad) {
-      // Filtrado de propiedades como tienes
+      // Filtrado de las propiedades 
       let filtradas = properties;
 
       if (tipoDetectado) {
@@ -274,7 +274,7 @@ export default function Chatbot({ properties }) {
         return;
       }
 
-      // Mostrar primeras 3 propiedades encontradas
+      // 
       const propsMostrar = filtradas.slice(0, 3).map((p) => ({
         titulo: p.Titles?.Title?.[0]?._ || "Sin título",
         ciudad: p.City,
@@ -301,7 +301,7 @@ export default function Chatbot({ properties }) {
       return;
     }
 
-    // Si no es mensaje de propiedad ni cita, se pregunta a Gemini y se añade recordatorio al final
+    // Aqui es donde gemini responde mediante su forma natural cuando es un proceso o una pregunta que no es relacionada a propiedades
     const contexto = `Eres Top Mexico Real Estate, un asistente virtual experto en bienes raíces en México. Contesta claramente y si el usuario pregunta algo fuera de propiedades, responde normalmente pero recuerda siempre que estás en el sitio Top Mexico Real Estate, ayudando con bienes raíces.`;
 
     try {
